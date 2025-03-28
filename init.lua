@@ -17,3 +17,10 @@ end
 
 require "lazy_setup"
 require "polish"
+
+vim.api.nvim_set_keymap(
+  "i",
+  "<C-y>",
+  'copilot#Accept("<TAB>")',
+  { expr = true, silent = true, noremap = true, replace_keycodes = false }
+)

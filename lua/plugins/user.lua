@@ -1,4 +1,4 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
+-- if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
 
 -- You can also add or configure plugins by creating files in this `plugins/` folder
 -- PLEASE REMOVE THE EXAMPLES YOU HAVE NO INTEREST IN BEFORE ENABLING THIS FILE
@@ -84,5 +84,29 @@ return {
         Rule("a", "a", "-vim")
       )
     end,
+  },
+  {
+    "tpope/vim-rails",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      -- disable autocmd set filetype=eruby.yaml
+      vim.api.nvim_create_autocmd(
+        { 'BufNewFile', 'BufReadPost' },
+        {
+          pattern = { '*.yml' },
+          callback = function()
+            vim.bo.filetype = 'yaml'
+          end
+        }
+      )
+    end
+  },
+  {
+    "slim-template/vim-slim",
+    event = { "BufReadPre", "BufNewFile" },
+  },
+  {
+    "github/copilot.vim",
+    lazy=false,
   },
 }
