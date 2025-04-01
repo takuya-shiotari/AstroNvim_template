@@ -18,9 +18,7 @@ end
 require "lazy_setup"
 require "polish"
 
-vim.api.nvim_set_keymap(
-  "i",
-  "<C-y>",
-  'copilot#Accept("<TAB>")',
-  { expr = true, silent = true, noremap = true, replace_keycodes = false }
-)
+vim.opt.fileencoding = 'utf-8'
+vim.opt.fileencodings = 'ucs-bom,utf-8,euc-jp,cp932'
+
+vim.api.nvim_set_keymap("i", "<C-y>", 'copilot#Accept("<TAB>")', { expr = true, silent = true, noremap = true, replace_keycodes = false })
