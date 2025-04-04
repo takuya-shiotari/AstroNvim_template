@@ -39,7 +39,9 @@ return {
     },
     -- enable servers that you already have installed without mason
     servers = {
-      "solargraph",
+      "ruby_lsp",
+      "rubocop",
+      -- "solargraph",
       -- "pyright"
     },
     -- customize language server configuration options passed to `lspconfig`

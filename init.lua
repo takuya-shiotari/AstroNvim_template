@@ -18,7 +18,22 @@ end
 require "lazy_setup"
 require "polish"
 
-vim.opt.fileencoding = 'utf-8'
-vim.opt.fileencodings = 'ucs-bom,utf-8,euc-jp,cp932'
+vim.opt.fileencoding = "utf-8"
+vim.opt.fileencodings = "ucs-bom,utf-8,euc-jp,cp932"
 
-vim.api.nvim_set_keymap("i", "<C-y>", 'copilot#Accept("<TAB>")', { expr = true, silent = true, noremap = true, replace_keycodes = false })
+vim.api.nvim_set_keymap(
+  "i",
+  "<C-y>",
+  'copilot#Accept("<TAB>")',
+  { expr = true, silent = true, noremap = true, replace_keycodes = false }
+)
+
+require("lspconfig").ruby_lsp.setup {
+  cmd = { "ruby-lsp" },
+  filetypes = { "ruby", "eruby" },
+  root_dir = (require "lspconfig.util").root_pattern("Gemfile", ".git"),
+  init_options = {
+    formatter = "auto",
+  },
+  single_file_support = true,
+}
