@@ -90,16 +90,11 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       -- disable autocmd set filetype=eruby.yaml
-      vim.api.nvim_create_autocmd(
-        { 'BufNewFile', 'BufReadPost' },
-        {
-          pattern = { '*.yml' },
-          callback = function()
-            vim.bo.filetype = 'yaml'
-          end
-        }
-      )
-    end
+      vim.api.nvim_create_autocmd({ "BufNewFile", "BufReadPost" }, {
+        pattern = { "*.yml" },
+        callback = function() vim.bo.filetype = "yaml" end,
+      })
+    end,
   },
   {
     "slim-template/vim-slim",
@@ -107,6 +102,38 @@ return {
   },
   {
     "github/copilot.vim",
-    lazy=false,
+    lazy = false,
+    config = function() vim.g.copilot_no_tab_map = true end,
+  },
+  {
+    "nvim-neotest/neotest",
+    dependencies = {
+      "nvim-neotest/nvim-nio",
+      "nvim-lua/plenary.nvim",
+      "antoinemadec/FixCursorHold.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "olimorris/neotest-rspec",
+    },
+    config = function()
+      require("neotest").setup {
+        adapters = {
+          require "neotest-rspec" {
+            rspec_cmd = function() return { "bundle", "exec", "rspec" } end,
+          },
+        },
+      }
+    end,
+  },
+  {
+    "ravitemer/mcphub.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim", -- Required for Job and HTTP requests
+    },
+    -- comment the following line to ensure hub will be ready at the earliest
+    cmd = "MCPHub", -- lazy load by default
+    build = "npm install -g mcp-hub@latest", -- Installs required mcp-hub npm module
+    -- uncomment this if you don't want mcp-hub to be available globally or can't use -g
+    -- build = "bundled_build.lua",  -- Use this and set use_bundled_binary = true in opts  (see Advanced configuration)
+    config = function() require("mcphub").setup() end,
   },
 }

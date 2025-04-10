@@ -21,12 +21,7 @@ require "polish"
 vim.opt.fileencoding = "utf-8"
 vim.opt.fileencodings = "ucs-bom,utf-8,euc-jp,cp932"
 
-vim.api.nvim_set_keymap(
-  "i",
-  "<C-y>",
-  'copilot#Accept("<TAB>")',
-  { expr = true, silent = true, noremap = true, replace_keycodes = false }
-)
+vim.api.nvim_set_keymap("i", "<C-c>", 'copilot#Accept("<TAB>")', { expr = true, silent = true, noremap = true })
 
 require("lspconfig").ruby_lsp.setup {
   cmd = { "ruby-lsp" },
@@ -37,3 +32,14 @@ require("lspconfig").ruby_lsp.setup {
   },
   single_file_support = true,
 }
+
+local map = vim.keymap.set
+local neotest = require "neotest"
+
+-- テスト実行関連
+map("n", "<leader>rt", function() neotest.run.run() end, { desc = "Run nearest test" })
+map("n", "<leader>rf", function() neotest.run.run(vim.fn.expand "%") end, { desc = "Run file tests" })
+map("n", "<leader>rl", function() neotest.run.run_last() end, { desc = "Run last test" })
+map("n", "<leader>rs", function() neotest.summary.toggle() end, { desc = "Toggle test summary" })
+map("n", "<leader>ro", function() neotest.output.open { enter = true } end, { desc = "Open test output" })
+map("n", "<leader>rd", function() neotest.output_panel.toggle() end, { desc = "Toggle output panel" })
