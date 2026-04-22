@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sw_vers)",
+      "Bash(nvim --version)",
+      "Bash(nvim --headless -c \"lua local q = vim.treesitter.query.parse\\('markdown', '\\(atx_heading\\) @h'\\); print\\(q ~= nil\\)\" -c \"q\")",
+      "Bash(nvim *)"
+    ]
+  }
+}
