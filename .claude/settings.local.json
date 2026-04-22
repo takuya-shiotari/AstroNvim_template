@@ -4,7 +4,9 @@
       "Bash(sw_vers)",
       "Bash(nvim --version)",
       "Bash(nvim --headless -c \"lua local q = vim.treesitter.query.parse\\('markdown', '\\(atx_heading\\) @h'\\); print\\(q ~= nil\\)\" -c \"q\")",
-      "Bash(nvim *)"
+      "Bash(nvim *)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(d.get\\('AstroNvim', {}\\)\\)\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); [print\\(k,v\\) for k,v in d.items\\(\\) if 'astro' in k.lower\\(\\) or 'treesitter' in k.lower\\(\\)]\")"
     ]
   }
 }
