@@ -31,15 +31,15 @@ vim.opt.fileencodings = "ucs-bom,utf-8,euc-jp,cp932"
 
 vim.api.nvim_set_keymap("i", "<C-c>", 'copilot#Accept("<TAB>")', { expr = true, silent = true, noremap = true })
 
-require("lspconfig").ruby_lsp.setup {
+vim.lsp.config("ruby_lsp", {
   cmd = { "ruby-lsp" },
   filetypes = { "ruby", "eruby" },
-  root_dir = (require "lspconfig.util").root_pattern("Gemfile", ".git"),
+  root_markers = { "Gemfile", ".git" },
   init_options = {
     formatter = "auto",
   },
   single_file_support = true,
-}
+})
 
 local map = vim.keymap.set
 local neotest = require "neotest"
